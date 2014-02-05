@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Credit Me
+Plugin Name: Credibility
 Plugin URI:  https://github.com/cftp/credit-me
 Description: Add a credit to WordPress media
 Author:      Code For The People
 Version:     1.0
 Author URI:  http://codeforthepeople.com/
-Text Domain: credit-me
+Text Domain: credibility
 Domain Path: /languages/
 License:     GPL v2 or later
 
@@ -24,7 +24,7 @@ GNU General Public License for more details.
 
 */
 
-function credit_me_get_attachment( $attachment_id ) {
+function credibility_get_attachment( $attachment_id ) {
 
     $attachment = get_post( $attachment_id );
     return array(
@@ -38,12 +38,12 @@ function credit_me_get_attachment( $attachment_id ) {
     );
 }
 
-function credit_me_attachment_fields( $fields, $post ) {
+function credibility_attachment_fields( $fields, $post ) {
 
 	$credits = get_post_meta( $post->ID, 'credits', true );
 
 	if ( empty( $credits ) ) {
-		$image_meta = credit_me_get_attachment( $post->ID );
+		$image_meta = credibility_get_attachment( $post->ID );
     	if ( isset( $image_meta['meta']['image_meta'] ) and isset( $image_meta['meta']['image_meta']['credit'] ) ) {
         	$credits = $image_meta['meta']['image_meta']['credit'];
         }
@@ -51,7 +51,7 @@ function credit_me_attachment_fields( $fields, $post ) {
 	}
 
     $fields['credits'] = array(
-        'label'        => __('Credits', 'credit-me'),
+        'label'        => __('Credits', 'credibility'),
         'input'        => 'text',
         'value'        => $credits,
         'show_in_edit' => true,
@@ -60,9 +60,9 @@ function credit_me_attachment_fields( $fields, $post ) {
     return $fields;
 
 }
-add_filter( 'attachment_fields_to_edit', 'credit_me_attachment_fields', 10, 2 );
+add_filter( 'attachment_fields_to_edit', 'credibility_attachment_fields', 10, 2 );
 
-function credit_me_update_attachment_meta( $attachment ) {
+function credibility_update_attachment_meta( $attachment ) {
 
     global $post;
 
@@ -71,9 +71,9 @@ function credit_me_update_attachment_meta( $attachment ) {
     return $attachment;
 
 }
-add_filter( 'attachment_fields_to_save', 'credit_me_update_attachment_meta', 4);
+add_filter( 'attachment_fields_to_save', 'credibility_update_attachment_meta', 4);
 
-function credit_me_media_xtra_fields() {
+function credibility_media_xtra_fields() {
 
     $post_id = $_POST['id'];
     $meta = stripslashes( $_POST['attachments'][$post_id ]['credits'] );
@@ -81,4 +81,4 @@ function credit_me_media_xtra_fields() {
     clean_post_cache( $post_id );
 
 }
-add_action('wp_ajax_save-attachment-compat', 'credit_me_media_xtra_fields', 0, 1);
+add_action('wp_ajax_save-attachment-compat', 'credibility_media_xtra_fields', 0, 1);
