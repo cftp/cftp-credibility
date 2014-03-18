@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Credibility
+Plugin Name: CFTP Credibility
 Plugin URI:  https://github.com/cftp/credit-me
 Description: Add a credit to WordPress media
 Author:      Code For The People
