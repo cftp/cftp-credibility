@@ -23,6 +23,11 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 */
+function credibility_load_language_files() {
+	//
+	load_plugin_textdomain( 'credibility', false, dirname(__FILE__) . '/assets/languages');
+}
+add_action( 'init', 'credibility_load_language_files');
 
 function credibility_get_attachment( $attachment_id ) {
 
