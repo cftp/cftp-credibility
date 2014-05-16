@@ -14,4 +14,4 @@ msgstr ""
 
 #: credibility.php:54
 msgid "Credits"
-msgstr "CrĂŠdits"
+msgstr "Crédits"
